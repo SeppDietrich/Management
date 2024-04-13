@@ -17,32 +17,37 @@ void citire(inventar p[],int &n){
 	f.close();
 	
 }
+void TableHead(){
+	cout << setfill('-') << setw(87) << '\n';
+	cout << setfill(' ');
+	cout << "| " << setw(5) << "Nr." <<" | "
+	     << setw(15) << "Tip" << " | "
+	     << setw(11) << "Marca" << " | "
+	     << setw(10) << "Culoare" << " | "
+	     << setw(10) << "Pret" << " | "
+	     << setw(5) << "Cant" << " | "
+	     << setw(8) << "Dispon" << " |" << endl;
+	cout << setfill('-') << setw(87) << '\n';
+	cout << setfill(' ');
+}
+void afisare(inventar p, int &nr){
+	 cout << "| " << setw(5) << nr <<" | " 
+	 << setw(15) << p.tip << " | "
+         << setw(11) << p.marca << " | "
+         << setw(10) << p.culoare << " | "
+         << setw(10) << p.pret << " | "
+         << setw(5) << p.cant << " | "
+         << setw(8) << p.dispon << " |" << endl;
+    nr++;
+
+}
 void afisare(inventar p[],int n){
 	int nr =1;
+	TableHead();
+	for (int i = 0; i < n; i++) {
+		afisare(p[i], nr);
+	}	
 	cout << setfill('-') << setw(87) << '\n';
-cout << setfill(' ');
-cout << "| " << setw(5) << "Nr." <<" | "
-     << setw(15) << "Tip" << " | "
-     << setw(11) << "Marca" << " | "
-     << setw(10) << "Culoare" << " | "
-     << setw(10) << "Pret" << " | "
-     << setw(5) << "Cant" << " | "
-     << setw(8) << "Dispon" << " |" << endl;
-cout << setfill('-') << setw(87) << '\n';
-cout << setfill(' ');
-
-for (int i = 0; i < n; i++) {
-    cout << "| " << setw(5) << nr <<" | " 
-	 << setw(15) << p[i].tip << " | "
-         << setw(11) << p[i].marca << " | "
-         << setw(10) << p[i].culoare << " | "
-         << setw(10) << p[i].pret << " | "
-         << setw(5) << p[i].cant << " | "
-         << setw(8) << p[i].dispon << " |" << endl;
-    nr++;
-}
-
-cout << setfill('-') << setw(87) << '\n';
 
 }
 void adaugare(inventar p[],int &n){
@@ -60,8 +65,7 @@ void schimb(inventar *p1,inventar *p2){
 	*p1=*p2;
 	*p2=aux;
 }
-void SortarePret(inventar p[], int n){
-	inventar aux;
+void Sortare(inventar p[], int n){
 	int f;
 	do{
 		f=0;
@@ -74,4 +78,14 @@ void SortarePret(inventar p[], int n){
 	}while(f!=0);
 
 
+}
+void filtrare(inventar p[], int n, bool s){
+	TableHead();
+	int nr=1;
+	for(int i=0;i<n;i++){
+		if(p[i].dispon==s){
+			afisare(p[i],nr);
+		}
+	}
+	cout << setfill('-') << setw(87) << '\n';
 }
