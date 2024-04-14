@@ -1,3 +1,4 @@
+#define numein "date.in"
 using namespace std;
 
 struct inventar{
@@ -9,7 +10,7 @@ struct inventar{
 };
 
 void citire(inventar p[],int &n){
-	fstream f("date.in");
+	fstream f(numein);
 	f>>n;
 	for(int i=0;i<n;i++){
 		f>>p[i].tip>>p[i].marca>>p[i].culoare>>p[i].pret>>p[i].cant>>p[i].dispon;
@@ -65,19 +66,55 @@ void schimb(inventar *p1,inventar *p2){
 	*p1=*p2;
 	*p2=aux;
 }
-void Sortare(inventar p[], int n){
+void SortarePret(inventar p[], int n, bool t){
 	int f;
 	do{
 		f=0;
 		for(int i=0;i<n-1;i++){
-			if(p[i].pret<p[i+1].pret){
-				schimb(&p[i],&p[i+1]);
-				f=1;
+			if(t){
+				if(p[i].pret<p[i+1].pret){
+					schimb(&p[i],&p[i+1]);
+					f=1;
+				}
+			}else{
+				if(p[i].pret>p[i+1].pret){
+					schimb(&p[i],&p[i+1]);
+					f=1;
+				}
 			}
 		}
 	}while(f!=0);
 
 
+}
+void SortareDispon(inventar p[], int n){
+	int f;
+	do{
+		f=0;
+		for(int i=0;i<n-1;i++){
+			if(p[i].dispon<p[i+1].dispon){
+				schimb(&p[i],&p[i+1]);
+				f=1;
+			}
+		}
+	}while(f!=0);
+}
+void SortareMarca(inventar p[], int n, bool t){
+	int f;
+	do{
+		f=0;
+		for(int i=0;i<n-1;i++){
+			if(t){
+				if(strcmp(p[i].marca, p[i+1].marca)>0){
+				schimb(&p[i],&p[i+1]);
+				f=1;}
+			}else{
+				if(strcmp(p[i].marca, p[i+1].marca)<0){
+				schimb(&p[i],&p[i+1]);
+				f=1;}
+			}
+		}
+	}while(f!=0);
 }
 void filtrare(inventar p[], int n, bool s){
 	TableHead();
@@ -95,6 +132,14 @@ void filtrare(inventar p[], int n, int min, int max){
 	}
 	cout << setfill('-') << setw(87) << '\n';
 }
+void filtrare(inventar p[], int n, char c[]){
+	TableHead();
+	int nr=1;
+	for(int i=0;i<n;i++){
+		if(!strcmp(p[i].marca, c))afisare(p[i], nr);
+	}
+	cout << setfill('-') << setw(87) << '\n';
+}
 void sterge(inventar p[], int &n, int v[], int sizev){
 	for(int i=0;i<sizev;i++){
 		if(v[i]!=n-1){
@@ -108,4 +153,11 @@ void sterge(inventar p[], int &n, int v[], int sizev){
 		--n;
 	}
 	afisare(p, n);
+}void salvare (inventar p[], int n, char nume[]){
+	ofstream o(nume);
+	o<<n<<"\n";
+	for(int i=0;i<n;i++){
+		o<<p[i].tip<<" "<<p[i].marca<<" "<<p[i].culoare<<" "<<p[i].pret<<" "<<p[i].cant<<" "<<p[i].dispon<<"\n";
+	}
+	o.close();
 }
