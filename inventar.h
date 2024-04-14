@@ -97,8 +97,13 @@ void filtrare(inventar p[], int n, int min, int max){
 }
 void sterge(inventar p[], int &n, int v[], int sizev){
 	for(int i=0;i<sizev;i++){
-		for(int j=v[i];j<n-1;j++){
-			p[j]=p[j+1];	
+		if(v[i]!=n-1){
+			for(int j=v[i]-1;j<n-1;j++){
+				p[j]=p[j+1];	
+			}
+			for(int k=0;k<sizev;k++){
+				--v[k];
+			}
 		}
 		--n;
 	}

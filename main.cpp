@@ -71,7 +71,7 @@ int main(){
 		case 5:
 
 		break;
-		case 6:	
+		case 6:{	
 			afisare(produs ,n);
 			cout<<"Cite elemente doriti sa stergeti?"<<endl;
 			int ids;
@@ -82,23 +82,7 @@ int main(){
 				cin>>e[i];
 			}	
 			sterge(produs, n, e, ids);
-			/*aici imi fute o roare ibanutnaia
-			 *
-			 * main.cpp: In function ‘int main()’:
-main.cpp:87:22: error: jump to case label
-   87 |                 case 0:
-      |                      ^
-main.cpp:79:29: note:   crosses initialization of ‘int e [ids]’
-   79 |                         int e[ids];
-      |                             ^
-main.cpp:90:17: error: jump to case label
-   90 |                 default:
-      |                 ^~~~~~~
-main.cpp:79:29: note:   crosses initialization of ‘int e [ids]’
-   79 |                         int e[ids];
-      |                             ^
-make: *** [<builtin>: main] Error 1
-*/
+		       }
 		break;
 		case 0:
 	  		cout<<"Multumim ca esti alauri de noi"<<endl;
