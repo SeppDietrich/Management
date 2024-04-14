@@ -83,9 +83,24 @@ void filtrare(inventar p[], int n, bool s){
 	TableHead();
 	int nr=1;
 	for(int i=0;i<n;i++){
-		if(p[i].dispon==s){
-			afisare(p[i],nr);
-		}
+		if(p[i].dispon==s)afisare(p[i],nr);
 	}
 	cout << setfill('-') << setw(87) << '\n';
+}
+void filtrare(inventar p[], int n, int min, int max){
+	TableHead();
+	int nr=1;
+	for(int i=0;i<n;i++){
+		if((p[i].pret>min)&&(p[i].pret<max))afisare(p[i],nr);
+	}
+	cout << setfill('-') << setw(87) << '\n';
+}
+void sterge(inventar p[], int &n, int v[], int sizev){
+	for(int i=0;i<sizev;i++){
+		for(int j=v[i];j<n-1;j++){
+			p[j]=p[j+1];	
+		}
+		--n;
+	}
+	afisare(p, n);
 }
