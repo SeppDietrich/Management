@@ -14,15 +14,20 @@ int main(){
 	cout<<"Informatia a fost citita din date.in"<<endl;
 
 	do{
-        cout<<"Ce dorit sa faceti?"<<endl;
-	cout<<"	1 -Afisarea informatiei."<<endl;
-	cout<<"	2 -Adaugarea informatiai."<<endl;
-	cout<<"	3 -Sortarea informatiei."<<endl;
-	cout<<"	4 -Filtrarea informatiei."<<endl;
-	cout<<"	6 -Excluderea informatiei."<<endl;
-	cout<<"	7 -Salvarea informatiei."<<endl;
-	cout<<" 	0 -Oprirea programului"<<endl<<"	";
-	cin>>op;
+		cout<<"____________________________"<<
+		endl<<"| 1 | Afisarea produselor  |"<<
+		endl<<"| 2 | Adaugarea produselor |"<<
+		endl<<"| 3 | Sortarea Produselor  |"<<
+		endl<<"| 4 | Filtrarea Produselor |"<<
+		endl<<"| 5 | Cautarea Produselor  |"<<
+		endl<<"| 6 | Sergerea Produselor  |"<<
+		endl<<"| 7 | Salvarea Produselor  |"<<
+		endl<<"| 0 | Iesire din Program   |"<<
+		endl<<"----------------------------"<<
+		endl;
+	cout<<"/---------------------------"<<
+	endl<<"|Alegera dumneavoastra:";cin>>op;
+	cout<<"\\---------------------------"<<endl;       
 	switch(op){
 		case 1:
 			afisare(produs, n);
@@ -93,7 +98,38 @@ int main(){
 
 		break;
 		case 5:
+			cout<<"Ce tip de catare alegeti?"<<endl<<
+				"1 -Cautare dupa tip"<<endl<<
+                                "2 -Cautare dupa pret."<<endl<<
+                                "3 -Cautare dupa culoare"<<endl
+                                <<endl;
+			int t;
+			cin>>t;
+			switch(t){
+				case 1:
+					cout<<"Introduceti ce tip doriti"<<endl;
+					char tip[15];
+					cin>>tip;
+					cautareTip(produs, n, tip);
+	
+				break;
+				case 2:
+					cout<<"Introduceti pretul min si maxim:"
+					<<endl;
+					double min,max;
+					cin>>min>>max;
+					filtrare(produs, n, min, max);
+				break;
+				case 3:
+					cout<<"Introduceti ce culoare doriti"<<endl;
+					char culoare[15];
+					cin>>culoare;
+					cautareCuloare(produs, n, culoare);
+				break;
+			
+		}
 
+	
 		break;
 		case 6:{	
 			afisare(produs ,n);
@@ -101,7 +137,7 @@ int main(){
 			int ids;
 			cin>>ids;
 			int e[ids];
-			cout<<"Ce elemene doriti sa stergeti(nr din tabel)"<<endl;
+			cout<<"Ce elemente doriti sa stergeti(nr din tabel)"<<endl;
 			for (int i=0;i<ids;i++){
 				cin>>e[i];
 			}	

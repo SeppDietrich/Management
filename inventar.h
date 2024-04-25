@@ -38,7 +38,9 @@ void afisare(inventar p, int &nr){
          << setw(10) << p.culoare << " | "
          << setw(10) << p.pret << " | "
          << setw(5) << p.cant << " | "
-         << setw(8) << p.dispon << " |" << endl;
+         << setw(8);
+	 if(p.dispon){cout<<"Disponib";}else{cout<<"Indispon";} 
+	 cout<< " |" << endl;
     nr++;
 
 }
@@ -84,8 +86,7 @@ void SortarePret(inventar p[], int n, bool t){
 			}
 		}
 	}while(f!=0);
-
-
+	afisare(p, n);
 }
 void SortareDispon(inventar p[], int n){
 	int f;
@@ -98,6 +99,7 @@ void SortareDispon(inventar p[], int n){
 			}
 		}
 	}while(f!=0);
+	afisare(p, n);
 }
 void SortareMarca(inventar p[], int n, bool t){
 	int f;
@@ -115,6 +117,7 @@ void SortareMarca(inventar p[], int n, bool t){
 			}
 		}
 	}while(f!=0);
+	afisare(p, n);
 }
 void filtrare(inventar p[], int n, bool s){
 	TableHead();
@@ -140,6 +143,21 @@ void filtrare(inventar p[], int n, char c[]){
 	}
 	cout << setfill('-') << setw(87) << '\n';
 }
+void cautareTip(inventar p[], int n, char c[]){
+	TableHead();
+	int nr=1;
+	for(int i=0;i<n;i++){
+		if(!strcmp(p[i].tip, c))afisare(p[i], nr);
+	}
+	cout << setfill('-') << setw(87) << '\n';
+}void cautareCuloare(inventar p[], int n, char c[]){
+	TableHead();
+	int nr=1;
+	for(int i=0;i<n;i++){
+		if(!strcmp(p[i].culoare, c))afisare(p[i], nr);
+	}
+	cout << setfill('-') << setw(87) << '\n';
+}
 void sterge(inventar p[], int &n, int v[], int sizev){
 	for(int i=0;i<sizev;i++){
 		if(v[i]!=n-1){
@@ -153,7 +171,8 @@ void sterge(inventar p[], int &n, int v[], int sizev){
 		--n;
 	}
 	afisare(p, n);
-}void salvare (inventar p[], int n, char nume[]){
+}
+void salvare (inventar p[], int n, char nume[]){
 	ofstream o(nume);
 	o<<n<<"\n";
 	for(int i=0;i<n;i++){
